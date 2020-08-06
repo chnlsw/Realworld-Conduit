@@ -1,0 +1,28 @@
+image:
+  default:
+    url: https://static.productionready.io/images/smiley-cyrus.jpg
+
+jwt:
+  secret: nRvyYC4soFxBdZ-F-5Nnzz5USXstR1YylsTd-mA0aKtI9HUlriGrtkf-TiuDapkLiUCogO3JOK7kwZisrHp6wA
+  sessionTime: 86400
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-handlers-package: com.spring.realworld.infra.mybatis
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+server:
+  servlet:
+    context-path: /realworld
+  port: 80
+
+spring:
+  h2:
+    console:
+      enabled: true
+  jackson:
+    deserialization:
+      UNWRAP_ROOT_VALUE: true
