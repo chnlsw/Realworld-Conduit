@@ -6,3 +6,8 @@ create table users (
   bio text,
   image varchar(256)
 );
+
+create table follows (
+  user_id varchar(128) not null,
+  follow_id varchar(128) not null
+);

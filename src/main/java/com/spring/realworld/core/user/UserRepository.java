@@ -15,4 +15,10 @@ public interface UserRepository {
 
     Optional<User> findByEmail(String email);
 
+    void saveRelation(FollowRelation followRelation);
+
+    void removeRelation(FollowRelation followRelation);
+
+    Optional<FollowRelation> findRelation(String userId, String targetId);
+
 }

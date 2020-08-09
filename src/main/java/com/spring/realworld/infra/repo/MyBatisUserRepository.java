@@ -1,5 +1,6 @@
 package com.spring.realworld.infra.repo;
 
+import com.spring.realworld.core.user.FollowRelation;
 import com.spring.realworld.core.user.User;
 import com.spring.realworld.core.user.UserRepository;
 import com.spring.realworld.infra.mybatis.mapper.UserMapper;
@@ -40,6 +41,23 @@ public class MyBatisUserRepository implements UserRepository {
     @Override
     public Optional<User> findByEmail(String email) {
         return Optional.ofNullable(userMapper.findByEmail(email));
+    }
+
+    @Override
+    public void saveRelation(FollowRelation followRelation) {
+        if (!findRelation(followRelation.getUserId(), followRelation.getTargetId()).isPresent()) {
+            userMapper.saveRelation(followRelation);
+        }
+    }
+
+    @Override
+    public void removeRelation(FollowRelation followRelation) {
+        userMapper.deleteRelation(followRelation);
+    }
+
+    @Override
+    public Optional<FollowRelation> findRelation(String userId, String targetId) {
+        return Optional.ofNullable(userMapper.findRelation(userId, targetId));
     }
 
 }

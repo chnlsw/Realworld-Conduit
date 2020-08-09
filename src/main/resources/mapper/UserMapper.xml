@@ -36,6 +36,19 @@
         select id, username, email, password, bio, image from users where email = #{email}
     </select>
 
+    <insert id="saveRelation">
+        insert into follows(user_id, follow_id) values (#{followRelation.userId}, #{followRelation.targetId})
+    </insert>
+
+    <delete id="deleteRelation">
+        delete from follows where user_id = #{followRelation.userId} and follow_id = #{followRelation.targetId}
+    </delete>
+
+    <select id="findRelation" resultMap="follow">
+        SELECT F.user_id followUserId, F.follow_id followTargetId from follows F
+        where F.user_id = #{userId} and F.follow_id = #{targetId}
+    </select>
+
     <resultMap id="user" type="com.spring.realworld.core.user.User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
@@ -43,6 +56,11 @@
         <result column="password" property="password"/>
         <result column="bio" property="bio"/>
         <result column="image" property="image"/>
+    </resultMap>
+
+    <resultMap id="follow" type="com.spring.realworld.core.user.FollowRelation">
+        <result column="followUserId" property="userId"/>
+        <result column="followTargetId" property="targetId"/>
     </resultMap>
 
 </mapper>
